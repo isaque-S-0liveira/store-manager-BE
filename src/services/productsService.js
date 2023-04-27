@@ -11,8 +11,8 @@ const getById = async (id) => {
 };
 
 const insertProduct = async (product) => {
-  console.log(product);
   const insertId = await productsModel.insertProduct(product);
+  console.log(insertId);
   return insertId;
 };
 

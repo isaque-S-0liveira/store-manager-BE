@@ -38,11 +38,27 @@ describe('Product Controller', function () {
       res.json = sinon.stub().returns();
       req.params = sinon.stub().returns(req);
 
-
       await productsController.getById(req, res);
       // console.log(res.json);
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith({ id: 1, name: 'Martelo de Thor' });
     });
   })
+  describe('cadastra um produto', function () {
+    it('com sucesso', async function () {
+      const expected = 1
+      sinon.stub(productSevice, 'insertProduct').resolves(expected);
+      const req = {};
+      const res = {};
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      req.body = {name: 'productx'}
+
+      await productsController.insertProduct(req, res)
+      console.log(res.json);
+      expect(res.status).to.have.been.calledWith(201);
+      expect(res.json).to.have.been.calledWith({ id: 1, name: 'productx' })
+    });
+  });
 });

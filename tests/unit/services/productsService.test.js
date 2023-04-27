@@ -25,4 +25,15 @@ describe('Product Service', function () {
       expect(result).to.be.keys(['id', 'name']);
     });
   });
+  describe('cadastra um produto', function () {
+    it('com sucesso', async function () {
+      const expected = 1;
+
+      sinon.stub(productModel, 'insertProduct').resolves(expected);
+
+      const body = { name: 'produtoX' };
+      const result = await productSevice.insertProduct(body);
+      expect(result).to.equal(1);
+    });
+  });
 });

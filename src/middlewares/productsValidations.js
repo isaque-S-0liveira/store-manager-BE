@@ -13,17 +13,23 @@ const validateId = async (req, res, next) => {
   next();
 };
 
+const haveError = (error) => {
+  if (error) {
+    const [{ type }] = error.details;
+    return type;
+  }
+};
+
 const validateName = (req, res, next) => {
   const { name } = req.body;
   const { error } = schemas.InsertproductsSchemas.validate({ name });
-  const [{ type }] = error.details;
-  if (error && type === 'any.required') {
-    return res.status(400).json({ message: error.message });
-  }
-  if (error && type === 'string.min') {
-    console.log(type);
-    return res.status(422).json({ message: error.message });
-  }
+
+    if (error && haveError(error) === 'any.required') {
+      return res.status(400).json({ message: error.message });
+    }
+    if (error && haveError(error) === 'string.min') {
+      return res.status(422).json({ message: error.message });
+    } 
   next();
 };
 

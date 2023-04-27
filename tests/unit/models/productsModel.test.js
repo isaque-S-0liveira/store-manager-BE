@@ -3,7 +3,6 @@ const sinon = require('sinon');
 const connection = require('../../../src/models/connection');
 const productsModel = require('../../../src/models/productsModel');
 const { allProductsMock, getProductId } = require('../mock/products.mock');
-const { get } = require('../../../src/app');
 
 describe('Products Model', function () {
   describe('Acessa todos os produtos', function () {
@@ -32,7 +31,17 @@ describe('Products Model', function () {
       const result = await productsModel.getById(id);
       expect(result).to.be.an('object');
       expect(result).to.be.keys(['id', 'name']);
+    });
+  });
+  describe('cadastra um produto', function () {
+    it('com sucesso', async function () {
+      const expected = [{ insertId: 1 }];
 
+      sinon.stub(connection, 'execute').resolves( expected );
+
+      const body = { name: 'produtoX' };
+      const result = await productsModel.insertProduct(body);
+      expect(result).to.equal(1);
     });
   });
 })
