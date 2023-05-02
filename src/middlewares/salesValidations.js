@@ -17,7 +17,7 @@ const validateSaleInsert = (req, res, next) => {
     console.log(req.body);
     return res.status(400).json({ message: error.message });
   }
-  // fazer validação de number.min();
+  
   if (error && ErrorType(error) === 'number.min') {
     return res.status(422).json({ message: error.message });
   }

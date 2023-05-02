@@ -5,13 +5,13 @@ const productsModel = require('../../../src/models/productsModel');
 const { allProductsMock, getProductId } = require('../mock/products.mock');
 
 describe('Products Model', function () {
+  afterEach(function () {
+    sinon.restore();
+  })
   describe('Acessa todos os produtos', function () {
     before(async function () {
       sinon.stub(connection, 'execute').resolves([allProductsMock])
     })
-    after(async function () {
-      connection.execute.restore();
-    });
 
     it('com sucesso', async function () {
       const result = await productsModel.getAll();
@@ -22,9 +22,6 @@ describe('Products Model', function () {
   describe('Acessa um produto pelo id', function () {
     before(async function () {
       sinon.stub(connection, 'execute').resolves([getProductId]);
-    });
-    after(async function () {
-      connection.execute.restore();
     });
     const id = 1;
     it('com sucesso', async function () {

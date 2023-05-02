@@ -15,7 +15,7 @@ describe('Product Service', function () {
       expect(result).to.have.length(2);
     });
   });
-  describe('cacessa um produto pelo id', function () {
+  describe('acessa um produto pelo id', function () {
     afterEach(() => sinon.restore());
     it('com sucesso', async function () {
       const id = 1;
