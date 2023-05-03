@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const schema = require('../joi/salesSchemas');
+const salesModel = require('../models/salesModel');
 const { getAll } = require('../models/productsModel');
 
 const ErrorType = (error) => {
@@ -36,7 +37,18 @@ const validateProductId = async (req, res, next) => {
   next();
 };
 
+const validationId = async (req, res, next) => {
+  const { id } = req.params;
+  const allProducts = await salesModel.getAll();
+  const trueID = allProducts.find((el) => el.saleId === Number(id));
+  if (!trueID) {
+    return res.status(404).json({ message: 'Sale not found' });
+  }
+  next();
+};
+
 module.exports = {
   validateSaleInsert,
   validateProductId,
+  validationId,
 };
