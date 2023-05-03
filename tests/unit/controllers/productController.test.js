@@ -61,4 +61,23 @@ describe('Product Controller', function () {
       expect(res.json).to.have.been.calledWith({ id: 1, name: 'productx' })
     });
   });
+  describe('retorna o status e o produto atualizado', function () {
+    it('com sucesso', async function () {
+      const insertId = 1;
+      sinon.stub(productSevice, 'updateProduct').resolves(insertId);
+
+      const req = {}
+      const res = {}
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      req.body = { name: 'productX' };
+      req.params = { id: 1 };
+
+     await productsController.updateProduct(req, res);
+
+     expect(res.status).to.have.been.calledWith(200);
+     expect(res.json).to.have.been.calledWith({ id: 1, name: 'productX' })
+    });
+  });
 });

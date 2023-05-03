@@ -36,4 +36,15 @@ describe('Product Service', function () {
       expect(result).to.equal(1);
     });
   });
+  describe('atualiza um produto', function () { 
+    it('com sucesso', async function () {
+      const insertId = 1;
+      sinon.stub(productModel, 'updateProduct').resolves(insertId);
+
+      const id = 1;
+      const result = await productSevice.updateProduct(id, 'productX');
+
+      expect(result).to.equal(1);
+    });
+  });
 });

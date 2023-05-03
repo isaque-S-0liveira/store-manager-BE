@@ -41,4 +41,14 @@ describe('Products Model', function () {
       expect(result).to.equal(1);
     });
   });
+  describe('atualiza um produto', function () { 
+    it('com sucesso', async function () {
+      const insertId = [{ insertId: 1 }];
+      sinon.stub(connection, 'execute').resolves(insertId);
+      const id = 1;
+      const result = await productsModel.updateProduct(id, 'productX');
+
+      expect(result).to.equal(1);
+    });
+  });
 })
