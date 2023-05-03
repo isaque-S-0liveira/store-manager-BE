@@ -47,4 +47,15 @@ describe('Product Service', function () {
       expect(result).to.equal(1);
     });
   });
+  describe('deleta um produto', function () {
+    it('com sucesso', async function () {
+      const insertId = 1;
+      sinon.stub(productModel, 'DeleteProduct').resolves(insertId);
+
+      const id = 1;
+      const result = await productSevice.DeleteProduct(id);
+
+      expect(result).to.equal(1);
+    });
+  });
 });

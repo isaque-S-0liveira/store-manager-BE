@@ -44,4 +44,14 @@ describe('Sales Model', function () {
       expect(response).to.deep.equal(salesMock.sale[0]);
     });
   });
+  describe('deleta vendas', function () {
+    it('com sucesso', async function () {
+      const insertId = [{ insertId: 1 }];
+      sinon.stub(connection, 'execute').resolves(insertId);
+      const id = 1;
+      const response = await salesModel.deleteSale(id);
+
+      expect(response).to.equal(1);
+    });
+  });
 });

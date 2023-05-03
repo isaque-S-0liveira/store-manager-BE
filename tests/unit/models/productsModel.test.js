@@ -51,4 +51,14 @@ describe('Products Model', function () {
       expect(result).to.equal(1);
     });
   });
+  describe('deleta um produto', function () {
+    it('com sucesso', async function () {
+      const insertId = [{ insertId: 1 }];
+      sinon.stub(connection, 'execute').resolves(insertId);
+      const id = 1;
+      const result = await productsModel.DeleteProduct(id);
+
+      expect(result).to.equal(1);
+    });
+  });
 })

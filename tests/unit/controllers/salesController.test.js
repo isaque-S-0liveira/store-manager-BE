@@ -63,4 +63,22 @@ describe('Sale Controller', function () {
       expect(res.json).to.have.been.calledWith(saleMock.sale);
     });
   });
+  describe('deleta vendas e retorna o status correto', function () {
+    it('com sucesso', async function () {
+      const insertId = 1;
+      sinon.stub(saleService, 'deleteSale').resolves(insertId);
+
+      const req = {};
+      const res = {};
+
+      res.status = sinon.stub().returns(res);
+      res.end = sinon.stub().returns();
+      req.params = sinon.stub().returns(req);
+
+
+      await saleController.deleteSale(req, res);
+
+      expect(res.status).to.have.been.calledWith(204);
+    });
+  });
 });

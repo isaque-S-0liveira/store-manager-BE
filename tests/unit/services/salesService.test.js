@@ -36,4 +36,15 @@ describe('Sale Service', function () {
       expect(response).to.deep.equal(salesMock.sale);
     });
   });
+  describe('deleta vendas', function () {
+    it('com sucesso', async function () {
+      const insertId = 1;
+      sinon.stub(salesModel, 'deleteSale').resolves(insertId);
+
+      const id = 1;
+      const response = await salesService.deleteSale(id);
+
+      expect(response).to.equal(1);
+    });
+  });
 })

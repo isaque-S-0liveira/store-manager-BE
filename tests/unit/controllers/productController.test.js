@@ -80,4 +80,21 @@ describe('Product Controller', function () {
      expect(res.json).to.have.been.calledWith({ id: 1, name: 'productX' })
     });
   });
+  describe('deleta um produdo e retorna o status correto', function () {
+    it('com sucesso', async function () {
+      const insertId = 1;
+      sinon.stub(productSevice, 'DeleteProduct').resolves(insertId);
+
+      const req = {}
+      const res = {}
+
+      res.status = sinon.stub().returns(res);
+      res.end = sinon.stub().returns();
+      req.params = { id: 1 };
+
+      await productsController.DeleteProduct(req, res);
+
+      expect(res.status).to.have.been.calledWith(204);
+    });
+  });
 });
