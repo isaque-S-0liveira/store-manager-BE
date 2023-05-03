@@ -44,9 +44,17 @@ ORDER BY sp.sale_Id `, [id],
   return sale;
 };
 
+const deleteSale = async (id) => {
+  const [{ insertId }] = await connection.execute(
+    'DELETE FROM sales WHERE id = ?', [id],
+  );
+  return insertId;
+};
+
 module.exports = {
   insertSale,
   insertDateSale,
   getAll,
   getById,
+  deleteSale,
 };
