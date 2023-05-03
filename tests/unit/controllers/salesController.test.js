@@ -29,4 +29,38 @@ describe('Sale Controller', function () {
 
     });
   });
+  describe('retorna o status correto e todas as vendas', function () { 
+    it('com sucesso', async function () {
+      sinon.stub(saleService, 'getAll').resolves(saleMock.allSales);
+      
+      const req = {};
+      const res = {};
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+
+      await saleController.getAll(req, res);
+
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(saleMock.allSales);
+    });
+  });
+  describe('retorna o status correto e vendas especificas', function () {
+    it('com sucesso', async function () {
+      sinon.stub(saleService, 'getById').resolves(saleMock.sale);
+
+      const req = {};
+      const res = {};
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      req.params = sinon.stub().returns(req);
+
+
+      await saleController.getById(req, res);
+
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(saleMock.sale);
+    });
+  });
 });

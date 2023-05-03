@@ -15,7 +15,7 @@ const insertSale = async (saleId, productId, quantity) => {
 
 const getAll = async () => {
   const [allSales] = await connection.execute(
-`SELECT 
+    `SELECT 
 sp.sale_id AS saleId,
 s.date AS date,
 sp.product_id AS productId,
